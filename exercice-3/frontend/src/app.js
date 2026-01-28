@@ -75,6 +75,10 @@ html = `
 </html>
   `;
 
+app.get("/", async (req, res) => {
+    res.redirect("/random-users");
+});
+
 app.get("/random-users", async (req, res) => {
     res.send(html);
 });
