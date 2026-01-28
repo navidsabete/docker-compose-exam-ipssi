@@ -10,6 +10,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
+app.get("/", async(req, res) => {
+    res.redirect("/users"); 
+}
+);
+
 // Lecture utilisateurs
 app.get("/users", async (req, res) => {
   const response = await fetch(`${BACKEND_URL}:${BACKEND_PORT}/api/users`);
@@ -26,7 +31,7 @@ app.get("/users", async (req, res) => {
     <ul>
     `;
     users.forEach(u => {
-        html += `<li>ID:${u.id} - ${u.username} 
+        html += `<li>ID: ${u.id} - ${u.username} | Password : ${u.password} |
                     
                       <a href="/users/${u.id}">
                       <button type="button">Voir détails</button>
@@ -70,7 +75,6 @@ app.get("/users/:id", async (req, res) => {
         <h1>Détails utilisateur</h1>
 
         <p><strong>ID :</strong> ${user.id}</p>
-        <p><i>Current password : ${user.password}</i></p>
 
         <form method="POST" action="/users/update/${user.id}">
             <label>

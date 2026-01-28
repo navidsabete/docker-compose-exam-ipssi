@@ -10,7 +10,7 @@ init_db()
 @app.route("/api/users", methods=["GET"])
 def get_users():
     users = User.get_all()
-    return jsonify([{"id": u.id, "username": u.username} for u in users])
+    return jsonify([{"id": u.id, "username": u.username, "password": "*******"} for u in users])
 
 @app.route("/api/users/create", methods=["POST"])
 def create_user():
@@ -25,7 +25,7 @@ def create_user():
 def get_user(user_id):
     user = User.get_user_details(user_id)
     if user:
-        return jsonify({"id": user.id, "username": user.username, "password": user.password})
+        return jsonify({"id": user.id, "username": user.username, "password": "*********"})
     return jsonify({"error": "User not found"}), 404
 
 @app.route("/api/users/<int:user_id>", methods=["PUT"])
