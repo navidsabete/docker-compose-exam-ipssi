@@ -19,7 +19,8 @@ Le projet évolue progressivement d’une architecture simple frontend/backend (
 
 ## Fonctionnalités
 
-- Backend API
+- Backend
+    - API
     - CRUD sur une ressource `user` (username, password)
     - Stockage des données dans PostgreSQL (SQLite sur l'exercice 2)
     - Appels à une API externe via le réseau **Tor (SOCKS5)**
@@ -30,7 +31,8 @@ Le projet évolue progressivement d’une architecture simple frontend/backend (
 
 - Base de données
     - PostgreSQL persistante via volume Docker
-    - Administration via PgAdmin (SQLite sur l'exercice 2)
+    - Administration via PgAdmin
+    - SQLite sur l'exercice 2
 
 ----
 
