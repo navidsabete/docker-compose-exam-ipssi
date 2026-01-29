@@ -9,7 +9,7 @@ Le projet est piloté via un **Makefile**. Commandes disponibles sur le fichier 
 **⚙️ Variables d'environnement et configuration**
 
 Les variables sont définis dans un fichier *.env*
-Vous trouverez le modèle on *env.template* et *<service>-template.env* que vous aurez besoin de copier dans votre propre fichier *.env* sur votre machine. Affectez ensuite la valeur que vous souhaitez sur chaque variable.
+Vous trouverez le modèle on *env.template* et *{service}-template.env* que vous aurez besoin de copier dans votre propre fichier *.env* sur votre machine. Affectez ensuite la valeur que vous souhaitez sur chaque variable.
 
 Configuration PgAdmin via le fichier *pgadmin_servers.json*.
 
