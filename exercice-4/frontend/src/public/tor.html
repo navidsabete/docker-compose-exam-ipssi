@@ -1,11 +1,3 @@
-const express = require('express');
-
-const app = express();
-const FRONTEND_PORT = process.env.FRONTEND_PORT;
-const BACKEND_URL = process.env.BACKEND_URL;
-const BACKEND_PORT = process.env.BACKEND_PORT;
-
-html = `
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -52,16 +44,16 @@ html = `
         const container = document.getElementById("users");
         container.innerHTML = "<p>Chargement...</p>";
         try {
-        const response = await fetch("/backend/random-users");
+        const response = await fetch("/tor-users/backend/random-users");
         const users = await response.json();
         container.innerHTML = "";
         users.forEach(user => {
           const divUser = document.createElement("div");
           divUser.className = "user";
-          divUser.innerHTML = \`
-            <img src="\${user.picture}" />
-            <p>\${user.name}</p>
-          \`;
+          divUser.innerHTML = `
+            <img src="${user.picture}" />
+            <p>${user.name}</p>
+          `;
           container.appendChild(divUser);
           });
             } catch (error) {
@@ -73,22 +65,3 @@ html = `
   </script>
 </body>
 </html>
-  `;
-
-app.get("/random-users", async (req, res) => {
-    res.send(html);
-});
-
-app.get("/backend/random-users", async (req, res) => {
-    try {
-    const response = await fetch(
-      `${BACKEND_URL}:${BACKEND_PORT}/tor-api/random-users`
-    );
-    const user = await response.json();
-    res.json(user);
-    } catch (err) {
-    res.status(500).json({ error: "Backend unreachable" });
-  }
-});
-
-app.listen(FRONTEND_PORT);
