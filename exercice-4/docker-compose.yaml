@@ -1,4 +1,25 @@
 services:
+  postgres:
+    image: postgres:15
+    container_name: ex4-postgres
+    env_file:
+      - docker/postgres.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: ex4-pgadmin
+    env_file:
+      - docker/pgadmin.env
+    volumes:
+      - ./docker/pgadmin_servers.json:/pgadmin4/servers.json
+    ports:
+      - "${LOCALHOST_PGADMIN_PORT}:${PGADMIN_PORT}"       
+    depends_on:
+      - postgres
+
+
   tor:
     image: dperson/torproxy
     container_name: ex4-tor
@@ -20,9 +41,10 @@ services:
     env_file:
       - docker/backend.env
     ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}"
+      - "${LOCALHOST_BACKEND_PORT}:${BACKEND_PORT}"
     depends_on:
       - tor
+      - postgres
 
   frontend:
     build:
@@ -32,6 +54,9 @@ services:
     env_file:
       - docker/frontend.env
     ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "${LOCALHOST_FRONTEND_PORT}:${FRONTEND_PORT}"
     depends_on:
       - backend
+
+volumes:
+  postgres_data:

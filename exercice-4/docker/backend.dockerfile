@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY backend/src/ /app/
 
-RUN pip install flask requests pysocks
+RUN pip install flask sqlalchemy psycopg2-binary requests pysocks
 
 EXPOSE 5000
 
